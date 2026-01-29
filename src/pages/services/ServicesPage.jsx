@@ -16,8 +16,17 @@ function ServicesPage() {
         onClose={() => setIsSidebarOpen(false)}
         title="Кешбек PRIDE"
       >
-        <div className="bg-[#00A650] text-center py-5 px-2 text-white">
-          Магазин пального
+        <div className=" h-screen   ">
+          <div className="relative  bg-[#01A651] text-center pt-5 px-2 text-white">
+            <div
+              onClick={() => setIsSidebarOpen(false)}
+              className="absolute left-3 p-2 top-3
+            "
+            >
+              {"<"}
+            </div>
+            <div className=""> Магазин пального</div>
+          </div>
           <TubButtons />
         </div>
       </RightSidebar>

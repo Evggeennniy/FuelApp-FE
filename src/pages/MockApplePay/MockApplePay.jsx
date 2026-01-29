@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { FaApplePay } from "react-icons/fa6";
+import ModalPortal from "../../widgets/ModalPortal/ModalPortal";
+import { useNavigate } from "react-router-dom";
 
-function ApplePayWidget() {
+function ApplePayWidget({ isAgreed, totalPrice }) {
   const [stage, setStage] = useState("idle"); // idle -> wallet -> processing -> success
   const [selectedCard, setSelectedCard] = useState(null);
-
+  const navigate = useNavigate();
   const cards = [
     {
       id: 2,
@@ -30,6 +32,7 @@ function ApplePayWidget() {
       setStage("success");
 
       // Автосброс через 3 секунды
+      navigate("/");
       setTimeout(() => {
         resetWidget();
       }, 2000);
@@ -50,14 +53,17 @@ function ApplePayWidget() {
   return (
     <div className="relative">
       {/* Кнопка запуска */}
+
       <button
         onClick={startPayment}
-        className="bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-xl flex items-center gap-3 text-lg font-medium transition-all duration-200 active:scale-95 shadow-lg"
+        className={`px-6 py-3 rounded-lg ${
+          !isAgreed || totalPrice === 0
+            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+            : "bg-[#01A651] text-white"
+        }`}
+        disabled={!isAgreed || totalPrice === 0}
       >
-        <span className="text-2xl">
-          <FaApplePay />
-        </span>
-        Pay with Apple Pay
+        ОПЛАТИТИ
       </button>
 
       {stage === "processing" && (
@@ -65,115 +71,116 @@ function ApplePayWidget() {
           <img src="/faceid.gif" alt="" />
         </div>
       )}
-
       {(stage === "wallet" || stage === "processing") && (
-        <>
-          <div
-            className="fixed inset-0 bg-black/50 z-40"
-            onClick={closeWallet}
-          />
+        <ModalPortal>
+          <>
+            <div
+              className="fixed inset-0 bg-black/50 z-[9999]"
+              onClick={closeWallet}
+            />
 
-          <div className="fixed bottom-0 left-0 right-0 bg-[#242225] rounded-t-2xl shadow-2xl z-50 animate-slideUp">
-            <div className="px-4">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h3 className="text-xl font-bold text-white">
-                    <FaApplePay size={60} />
-                  </h3>
-                </div>
-                <button
-                  onClick={closeWallet}
-                  className="text-gray-500 hover:text-gray-700 text-lg"
-                >
-                  ✕
-                </button>
-              </div>
-
-              {/* Спиннер обработки платежа (только в состоянии processing) */}
-
-              {/* Список карт (только в состоянии wallet) */}
-              {/* {stage === "wallet" && ( */}
-              <div className="space-y-4">
-                {cards.map((card) => (
-                  <div
-                    key={card.id}
-                    onClick={() => selectCard(card)}
-                    className="p-4 bg-[#2E2B2E] rounded-2xl cursor-pointer transition-all duration-200 active:scale-[0.98]"
+            <div className="fixed bottom-0 left-0 right-0 bg-[#242225] rounded-t-2xl shadow-2xl z-[10000] animate-slideUp">
+              <div className="px-4">
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <h3 className="text-xl font-bold text-white">
+                      <FaApplePay size={60} />
+                    </h3>
+                  </div>
+                  <button
+                    onClick={closeWallet}
+                    className="text-gray-500 hover:text-gray-700 text-lg"
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        {/* Иконка карты */}
-                        <div
-                          className={`w-14 h-10 rounded-lg bg-gradient-to-r ${card.color} flex items-center justify-center text-white font-bold`}
-                        >
-                          {card.icon}
-                        </div>
+                    ✕
+                  </button>
+                </div>
 
-                        <div>
-                          <div className="font-medium text-[#FFFFFF] ">
-                            {card.name}
+                {/* Спиннер обработки платежа (только в состоянии processing) */}
+
+                {/* Список карт (только в состоянии wallet) */}
+                {/* {stage === "wallet" && ( */}
+                <div className="space-y-4">
+                  {cards.map((card) => (
+                    <div
+                      key={card.id}
+                      onClick={() => selectCard(card)}
+                      className="p-4 bg-[#2E2B2E] rounded-2xl cursor-pointer transition-all duration-200 active:scale-[0.98]"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4">
+                          {/* Иконка карты */}
+                          <div
+                            className={`w-14 h-10 rounded-lg bg-gradient-to-r ${card.color} flex items-center justify-center text-white font-bold`}
+                          >
+                            {card.icon}
+                          </div>
+
+                          <div>
+                            <div className="font-medium text-[#FFFFFF] ">
+                              {card.name}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="text-[#aca7ac] text-sm">
-                        •••• {card.lastFour}
+                        <div className="text-[#aca7ac] text-sm">
+                          •••• {card.lastFour}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
 
-                <div className="px-4 py-2 bg-[#2E2B2E] rounded-2xl cursor-pointer transition-all duration-200 active:scale-[0.98]">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className="text-xs! text-[#FFFFFF] ">
-                        Изменить способ оплаты
+                  <div className="px-4 py-2 bg-[#2E2B2E] rounded-2xl cursor-pointer transition-all duration-200 active:scale-[0.98]">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="text-xs! text-[#FFFFFF] ">
+                          Изменить способ оплаты
+                        </div>
+                      </div>
+                      <div className="text-[#595659] text-xl">›</div>
+                    </div>
+                  </div>
+                </div>
+                {/* )} */}
+                {/* Информация о платеже (всегда видна) */}
+                <div className="mt-4 mb-4 pt-3">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <div className="text-[#818183] text-sm">
+                        Оплатить компании {"<<"}WOG RETAIL LCC{">>"}
+                      </div>
+                      <div className="font-medium text-[#FFFFFF] text-lg">
+                        {totalPrice}
+                        <img
+                          src="/grivna.svg"
+                          alt="Apple Pay"
+                          className="inline-block w-3 h-3"
+                        />
                       </div>
                     </div>
-                    <div className="text-[#595659] text-xl">›</div>
-                  </div>
-                </div>
-              </div>
-              {/* )} */}
-              {/* Информация о платеже (всегда видна) */}
-              <div className="mt-4 mb-4 pt-3">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <div className="text-[#818183] text-sm">
-                      Оплатить компании {"<<"}WOG RETAIL LCC{">>"}
-                    </div>
-                    <div className="font-medium text-[#FFFFFF] text-lg">
-                      66.00{" "}
-                      <img
-                        src="/grivna.svg"
-                        alt="Apple Pay"
-                        className="inline-block w-3 h-3"
-                      />
+                    <div className="text-right">
+                      {" "}
+                      <div className="text-[#595659] text-xl pr-4">›</div>
                     </div>
                   </div>
-                  <div className="text-right">
-                    {" "}
-                    <div className="text-[#595659] text-xl pr-4">›</div>
-                  </div>
                 </div>
-              </div>
-              {stage === "processing" && (
-                <div className="flex flex-col border-t p-2 border-[#595659] items-center justify-center ">
-                  {/* Спиннер */}
-                  <div className="w-6 h-6 mb-2">
-                    <div className="w-full h-full border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                  </div>
+                {stage === "processing" && (
+                  <div className="flex flex-col border-t p-2 border-[#595659] items-center justify-center ">
+                    {/* Спиннер */}
+                    <div className="w-6 h-6 mb-2">
+                      <div className="w-full h-full border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                    </div>
 
-                  {/* Текст */}
-                  <div className="text-center">
-                    <div className="text-white font-light text-xs mb-1">
-                      Обработка
+                    {/* Текст */}
+                    <div className="text-center">
+                      <div className="text-white font-light text-xs mb-1">
+                        Обработка
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
-          </div>
-        </>
+          </>
+        </ModalPortal>
       )}
 
       <style jsx>{`

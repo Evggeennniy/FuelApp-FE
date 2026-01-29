@@ -3,7 +3,7 @@
   display: flex;
   /* border-radius: 50px; */
   overflow: hidden;
-  margin-bottom: 30px;
+  margin-bottom: 8px;
   position: relative;
   gap: 0;
 }
@@ -36,9 +36,9 @@
 .tub-button.active {
   background-color: #ffffff;
   color: #01a651;
-  z-index: 2;
+  /* z-index: 2; */
   /* transform: scale(1.05); */
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 
 /* Button content with flex */
