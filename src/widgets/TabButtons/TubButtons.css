@@ -1,0 +1,226 @@
+/* Tub Switcher - Flex Container */
+.tub-switcher {
+  display: flex;
+  /* border-radius: 50px; */
+  overflow: hidden;
+  margin-bottom: 30px;
+  position: relative;
+  gap: 0;
+}
+
+/* Tub Buttons - Flex Items */
+.tub-button {
+  flex: 1; /* Equal width distribution */
+  padding: 5px;
+  border: none;
+  background-color: #00834361;
+
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.5px;
+  min-width: 0; /* Prevents overflow issues in flex */
+}
+
+/* Hover effect for inactive buttons */
+.tub-button:not(.active):hover {
+  background-color: #018a43;
+  transform: translateY(-2px);
+}
+
+/* Active button styling */
+.tub-button.active {
+  background-color: #ffffff;
+  color: #01a651;
+  z-index: 2;
+  /* transform: scale(1.05); */
+  font-weight: 700;
+}
+
+/* Button content with flex */
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.active-indicator {
+  background-color: #01a651;
+  color: white;
+  width: 24px;
+  height: 24px;
+  /* border-radius: 50%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  animation: popIn 0.3s ease;
+}
+
+/* Ripple animation effect */
+.tub-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  /* border-radius: 50%; */
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.6s,
+    height 0.6s;
+}
+
+/* .tub-button:active::before {
+  width: 300px;
+  height: 300px;
+} */
+
+/* Content display */
+.content-display {
+  background-color: #f8f9fa;
+  /* border-radius: 12px; */
+  padding: 25px;
+  margin-top: 20px;
+  border-left: 4px solid #01a651;
+  text-align: left;
+  animation: fadeIn 0.5s ease;
+}
+
+.content-display h3 {
+  color: #333;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.content-box {
+  background: white;
+  padding: 20px;
+  /* border-radius: 8px; */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.content-option h4 {
+  color: #01a651;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.content-option p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.content-option ul {
+  list-style-position: inside;
+  color: #666;
+}
+
+.content-option li {
+  margin-bottom: 8px;
+  padding-left: 10px;
+}
+
+/* Flex properties info */
+.flex-info {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f0f8ff;
+  /* border-radius: 10px; */
+  text-align: left;
+}
+
+.flex-info h3 {
+  color: #01a651;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.flex-properties {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.property {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px;
+  background: white;
+  /* border-radius: 6px; */
+  border-left: 4px solid #01a651;
+}
+
+.property code {
+  background-color: #e9ecef;
+  padding: 4px 8px;
+  /* border-radius: 4px; */
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  color: #333;
+  min-width: 120px;
+}
+
+.property span {
+  color: #666;
+  font-size: 14px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .tub-switcher {
+    flex-direction: row; /* Keep horizontal on mobile */
+  }
+
+  .tub-button {
+    font-size: 11px;
+  }
+
+  .flex-properties {
+    flex-direction: column;
+  }
+
+  .property {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
