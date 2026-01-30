@@ -5,7 +5,7 @@ function MainPage() {
   return (
     <>
       {" "}
-      <div className="w-full bg-[#F6F4F7] min-h-screen ">
+      <div className="w-full  bg-[#F6F4F7] min-h-screen ">
         <div
           className="h-[506px] relative bg-cover bg-center px-4"
           style={{ backgroundImage: "url('/backround.png')" }}
@@ -102,7 +102,6 @@ function MainPage() {
         >
           <img src="/QR.png" className=" max-w-[356px]" alt="" />
         </div>
-        {/* <TestWidget /> */}
       </div>
       <NavMenu />
     </>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaApplePay } from "react-icons/fa6";
-import ModalPortal from "../../widgets/ModalPortal/ModalPortal";
+import ModalPortal from "../ModalPortal/ModalPortal";
 import { useNavigate } from "react-router-dom";
 
 function ApplePayWidget({ isAgreed, totalPrice }) {
@@ -31,8 +31,7 @@ function ApplePayWidget({ isAgreed, totalPrice }) {
     setTimeout(() => {
       setStage("success");
 
-      // Автосброс через 3 секунды
-      navigate("/");
+      navigate("/thank-you");
       setTimeout(() => {
         resetWidget();
       }, 2000);

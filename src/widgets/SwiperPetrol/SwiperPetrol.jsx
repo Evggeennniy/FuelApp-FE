@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { FaChevronRight } from "react-icons/fa6";
-import ApplePayWidget from "../../pages/MockApplePay/MockApplePay";
+import ApplePayWidget from "../MockApplePay/MockApplePay";
 
 const fuels = [
   { id: 1, name: "ГАЗ", price: 39.98, color: "#77ADFC" },
@@ -11,7 +11,7 @@ const fuels = [
   { id: 4, name: "ДП", subtitle: "Diesel", price: 62.5, color: "#D38C9C" },
 ];
 
-function SwiperPetrol() {
+function SwiperPetrol({ type = "own" }) {
   const [activeId, setActiveId] = useState(1);
   const [litres, setLitres] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
@@ -20,7 +20,6 @@ function SwiperPetrol() {
   // Находим активное топливо
   const activeFuel = fuels.find((fuel) => fuel.id === activeId);
 
-  // Функция расчета общей стоимости
   const calculateTotalPrice = () => {
     if (!activeFuel || !litres || isNaN(parseFloat(litres))) {
       setTotalPrice(0);
@@ -36,13 +35,15 @@ function SwiperPetrol() {
     const calculatedPrice = litresNum * activeFuel.price;
     setTotalPrice(calculatedPrice);
   };
+  useEffect(() => {
+    localStorage.setItem("activeFuel", JSON.stringify(activeFuel));
+    localStorage.setItem("litresNum", litres);
+  }, [litres, activeFuel]);
 
-  // Расчет суммы при изменении литров или выборе топлива
   useEffect(() => {
     calculateTotalPrice();
   }, [litres, activeId]);
 
-  // Форматирование цены с 2 знаками после запятой
   const formatPrice = (price) => {
     return price.toFixed(2).replace(".", ",") + "₴";
   };
@@ -50,7 +51,7 @@ function SwiperPetrol() {
   return (
     <>
       <div className="bg-[#F6F4F7] py-3">
-        <div className="px-3 text-[13px] text-[#55545C]">
+        <div className="px-3 text-[13px] mb-2 text-[#55545C]">
           Оберіть вид пального
         </div>
         <Swiper spaceBetween={12} slidesPerView={3.2} className="">
@@ -90,6 +91,24 @@ function SwiperPetrol() {
       </div>
 
       <div className="bg-[#FFFFfF]">
+        {type !== "own" && (
+          <div className="flex justify-between px-2 py-4">
+            <div className="text-xs text-[#4D515D]">Номер одержувача</div>
+            <div className="flex">
+              <div className="text-[10px] text-[#A09EA1]">+380</div>
+              <input
+                type="phone"
+                className="w-30 border-b border-[#EAE8EA] text-right text-[16px] outline-none
+             appearance-none
+             [&::-webkit-inner-spin-button]:appearance-none
+             [&::-webkit-outer-spin-button]:appearance-none"
+                name="litre"
+                value={litres}
+                onChange={(e) => setLitres(e.target.value)}
+              />
+            </div>
+          </div>
+        )}
         <div className="flex justify-between px-2 py-4">
           <div className="text-xs text-[#4D515D]">Вкажіть кількість, л</div>
           <input
@@ -111,23 +130,49 @@ function SwiperPetrol() {
         </div>
       </div>
 
-      {/* Фиксированный контейнер внизу страницы */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4">
-        <div className="flex items-center mb-3">
+        <label className="flex items-center mb-3 cursor-pointer select-none">
+          {/* hidden real checkbox */}
           <input
             type="checkbox"
-            className="mr-2"
-            id="agreement"
             checked={isAgreed}
             onChange={(e) => setIsAgreed(e.target.checked)}
+            className="sr-only"
           />
-          <label htmlFor="agreement" className="text-[12px]">
+
+          {/* custom checkbox */}
+          <span
+            className={`w-[25px]! h-[23px] mt-[2px] border-2 rounded flex items-center justify-center
+        transition-all
+        ${
+          isAgreed
+            ? "bg-[#349B56] border-[#349B56]"
+            : "bg-white border-[#349B56]"
+        }`}
+          >
+            {isAgreed && (
+              <svg
+                className="w-4 h-4 text-white"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            )}
+          </span>
+
+          {/* text */}
+          <span className="ml-3 text-[12px] leading-[16px] text-[#4D515D]">
             Я погоджуюсь з{" "}
             <span className="text-[#349B56]">
               правилами купівлі в онлайн-магазині WOG
             </span>
-          </label>
-        </div>
+          </span>
+        </label>
 
         <div className="flex items-center justify-end gap-2">
           <div className="text-[14px] text-[#0F8F56]">

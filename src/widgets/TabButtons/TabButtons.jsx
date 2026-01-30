@@ -33,7 +33,9 @@ const TubButtons = () => {
               <SwiperPetrol />
             </div>
           ) : (
-            <div className="content-option"></div>
+            <div className="">
+              <SwiperPetrol type="friend" />
+            </div>
           )}
         </div>
       </div>
