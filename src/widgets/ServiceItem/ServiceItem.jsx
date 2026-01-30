@@ -1,4 +1,13 @@
-function ServiceItem({ icon, title, subtitle, onClick, highlighted }) {
+import { Children } from "react";
+
+function ServiceItem({
+  icon,
+  title,
+  subtitle,
+  onClick,
+  highlighted,
+  children,
+}) {
   return (
     <div
       onClick={onClick}
@@ -16,6 +25,7 @@ function ServiceItem({ icon, title, subtitle, onClick, highlighted }) {
         <p className="text-[#4D515D] text-[16px]">{title}</p>
 
         {subtitle && <p className="text-[#4D515D] text-[10px]">{subtitle}</p>}
+        {children}
       </div>
     </div>
   );

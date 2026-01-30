@@ -5,6 +5,7 @@ import { useState } from "react";
 import RightSidebar from "../../widgets/RightSidebar/RightSidebar";
 import ServiceItem from "../../widgets/ServiceItem/ServiceItem";
 import TubButtons from "../../widgets/TabButtons/TabButtons";
+import { FaChevronLeft } from "react-icons/fa";
 
 function ServicesPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -23,7 +24,7 @@ function ServicesPage() {
               className="absolute left-3 p-2 top-3
             "
             >
-              {"<"}
+              <FaChevronLeft color="white" />
             </div>
             <div className=""> Магазин пального</div>
           </div>
@@ -53,7 +54,12 @@ function ServicesPage() {
         highlighted
         title="Вже маєте поліс?"
         subtitle="Нагадаємо оформити наступний, коли прийде час"
-      />
+      >
+        <div className="text-[13px] text-[#00A650] mt-1">
+          {" "}
+          Додати існуючий поліс
+        </div>
+      </ServiceItem>
 
       <ServiceItem
         icon="/calculator.png"

@@ -1,6 +1,42 @@
 import NavMenu from "../../widgets/NavMenu/NavMenu";
 import ImageSwiper from "../../widgets/ImageSwiper/ImageSwiper";
+import WogPayBar from "../../widgets/WogPayBar/WogPayBar";
+import ActionCard from "../../widgets/ActionCard/ActionCard";
+// import WogPayBar from "@/components/WogPayBar";
 
+WogPayBar;
+
+const items = [
+  {
+    icon: "/petrol.svg",
+    label: "Заправка",
+    onClick: () => console.log("Fuel"),
+  },
+  {
+    icon: "/cofe.png",
+    label: "Кава",
+  },
+  {
+    icon: "/food.svg",
+    label: "Кафе",
+  },
+];
+const actions = [
+  {
+    icon: "/coupon.svg",
+    label: (
+      <>
+        Купони / <br /> сертифікати
+      </>
+    ),
+    onClick: () => console.log("Coupons"),
+  },
+  {
+    icon: "/petrol_green.svg",
+    label: "Ціни на пальне",
+    onClick: () => console.log("Fuel prices"),
+  },
+];
 function MainPage() {
   return (
     <>
@@ -50,50 +86,15 @@ function MainPage() {
               </button>
             </div>
           </div>
-          <div
-            style={{ backgroundImage: "url('/rectangle.png')" }}
-            className="h-[108px] bottom-0  left-0 absolute 0  bg-cover w-full bg-center  px-4"
-          >
-            <div className="text-sm  text-center text-[#07A451] mt-2 mb-4">
-              WOG PAY
-            </div>
-            <div className="flex max-w-[290px] mx-auto justify-between items-center">
-              <div className="flex w-14 flex-col  gap-1 items-center justify-center">
-                <div className="h-9 w-9  text-sm flex justify-center items-center rounded-full bg-[#07A451]">
-                  <img src="/petrol.svg" className="w-[15px] h-[17px]" alt="" />
-                </div>
-                <div className="text-xs"> Заправка</div>
-              </div>
-              <div className="flex w-14 flex-col gap-1 items-center justify-center">
-                <div className="h-9 w-9  text-sm flex justify-center items-center rounded-full bg-[#07A451]">
-                  <img src="/cofe.png" className="w-3 h-4" alt="" />
-                </div>
-                <div className="text-xs">Кава</div>
-              </div>
-              <div className="flex w-14 flex-col gap-1   items-center justify-center">
-                <div className="h-9 w-9  flex justify-center items-center rounded-full bg-[#07A451]">
-                  <img src="/food.svg" alt="" />
-                </div>
-                <div className="text-xs">Кафе</div>
-              </div>
-            </div>
-          </div>
+          <WogPayBar items={items} />
         </div>
         <div className="px-4 mt-4">
           {" "}
           <ImageSwiper />
           <div className="flex justify-center mb-4 gap-1">
-            <div className="flex-1 flex rounded-lg gap-5 bg-[#FFFFFF] py-5 justify-center items-center">
-              <img src="/coupon.svg" alt="" />
-              <p className="text-xs text-[#4D515D]">
-                Купони/ <br />
-                сертифікати
-              </p>
-            </div>
-            <div className="flex-1 flex rounded-lg gap-5 bg-[#FFFFFF] py-5 justify-center items-center">
-              <img src="/petrol_green.svg" alt="" />
-              <p className="text-xs text-[#4D515D]">Ціни на пальне</p>
-            </div>
+            {actions.map((item, index) => (
+              <ActionCard key={index} {...item} />
+            ))}
           </div>
         </div>
         <div

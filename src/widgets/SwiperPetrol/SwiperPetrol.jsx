@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { FaChevronRight } from "react-icons/fa6";
 import ApplePayWidget from "../MockApplePay/MockApplePay";
+import { formatPhone } from "../../utils/formatPhone";
 
 const fuels = [
   { id: 1, name: "ГАЗ", price: 39.98, color: "#77ADFC" },
@@ -10,14 +11,13 @@ const fuels = [
   { id: 3, name: "95", subtitle: "Mustang", price: 64.98, color: "#D38C9C" },
   { id: 4, name: "ДП", subtitle: "Diesel", price: 62.5, color: "#D38C9C" },
 ];
-
 function SwiperPetrol({ type = "own" }) {
-  const [activeId, setActiveId] = useState(1);
+  const [activeId, setActiveId] = useState();
   const [litres, setLitres] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
   const [isAgreed, setIsAgreed] = useState(false);
+  const [phone, setPhone] = useState("");
 
-  // Находим активное топливо
   const activeFuel = fuels.find((fuel) => fuel.id === activeId);
 
   const calculateTotalPrice = () => {
@@ -62,7 +62,7 @@ function SwiperPetrol({ type = "own" }) {
               <SwiperSlide key={fuel.id}>
                 <button
                   onClick={() => setActiveId(fuel.id)}
-                  className={`w-full rounded-lg px-5 pt-3 pb-1 mb-2 text-start transition-all
+                  className={`rounded-lg h-[125px] max-w-[110px] w-full flex flex-col px-5 pt-3 pb-1 mb-2 text-start transition-all
                     ${
                       isActive
                         ? "bg-white shadow-md"
@@ -80,7 +80,7 @@ function SwiperPetrol({ type = "own" }) {
                     <p className="text-[12px] text-gray-400">{fuel.subtitle}</p>
                   )}
 
-                  <p className="text-[12px] text-end mt-[25px] text-gray-500">
+                  <p className="text-[16px] mt-auto text-end  text-gray-500">
                     {formatPrice(fuel.price)}
                   </p>
                 </button>
@@ -92,28 +92,34 @@ function SwiperPetrol({ type = "own" }) {
 
       <div className="bg-[#FFFFfF]">
         {type !== "own" && (
-          <div className="flex justify-between px-2 py-4">
+          <div
+            className="flex justify-between px-3  py-4
+             animate-fadeSlideUp"
+          >
             <div className="text-xs text-[#4D515D]">Номер одержувача</div>
-            <div className="flex">
+
+            <div className="flex items-center gap-1">
               <div className="text-[10px] text-[#A09EA1]">+380</div>
+
               <input
-                type="phone"
-                className="w-30 border-b border-[#EAE8EA] text-right text-[16px] outline-none
-             appearance-none
-             [&::-webkit-inner-spin-button]:appearance-none
-             [&::-webkit-outer-spin-button]:appearance-none"
-                name="litre"
-                value={litres}
-                onChange={(e) => setLitres(e.target.value)}
+                type="tel"
+                inputMode="numeric"
+                className="w-28 border-b border-[#EAE8EA]
+                 text-right text-[#4D515D] text-[16px] outline-none
+                 focus:border-[#00A650]
+                 transition-colors duration-200"
+                value={phone}
+                onChange={(e) => setPhone(formatPhone(e.target.value))}
               />
+              <img src="/persone.png" className="w-4" alt="" />
             </div>
           </div>
         )}
-        <div className="flex justify-between px-2 py-4">
+        <div className="flex justify-between px-3  py-4">
           <div className="text-xs text-[#4D515D]">Вкажіть кількість, л</div>
           <input
             type="number"
-            className="w-30 border-b border-[#EAE8EA] text-right text-[16px] outline-none
+            className="w-20 border-b border-[#EAE8EA] text-right text-[16px] outline-none
              appearance-none
              [&::-webkit-inner-spin-button]:appearance-none
              [&::-webkit-outer-spin-button]:appearance-none"
@@ -122,7 +128,7 @@ function SwiperPetrol({ type = "own" }) {
             onChange={(e) => setLitres(e.target.value)}
           />
         </div>
-        <div className="flex justify-between border-b border-[#F7F5F7] px-2 py-4">
+        <div className="flex justify-between border-b border-[#F7F5F7] px-3  py-4">
           <div className="text-xs text-[#4D515D]">Спосіб оплати</div>
           <div className="text-xs text-[#444852] flex items-center gap-2">
             Apple Pay <FaChevronRight color="#E5E3E5" />
@@ -182,7 +188,6 @@ function SwiperPetrol({ type = "own" }) {
         </div>
       </div>
 
-      {/* Отступ для фиксированного блока внизу */}
       <div className="h-28"></div>
     </>
   );
