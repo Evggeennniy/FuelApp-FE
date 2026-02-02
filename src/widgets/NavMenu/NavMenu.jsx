@@ -12,13 +12,17 @@ const linkClass = ({ isActive }) =>
 
 function NavMenu() {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#E4E0E5] px-5 pt-3  flex justify-between items-center">
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#E4E0E5] px-5 pt-3 pb-4 flex justify-between items-center">
       <NavLink to="/" className={linkClass}>
         <MdHomeFilled size={19} />
         <p className="text-sm">Головна</p>
       </NavLink>
 
-      <NavLink to="/discounts" className={linkClass}>
+      <NavLink
+        to="/discounts"
+        onClick={(e) => e.preventDefault()}
+        className={linkClass}
+      >
         <TbRosetteDiscountFilled size={19} />
         <p className="text-sm">Акції</p>
       </NavLink>
@@ -28,7 +32,11 @@ function NavMenu() {
         <p className="text-sm">Послуги</p>
       </NavLink>
 
-      <NavLink to="/map" className={linkClass}>
+      <NavLink
+        to="/map"
+        onClick={(e) => e.preventDefault()}
+        className={linkClass}
+      >
         <TfiMapAlt size={19} />
         <p className="text-sm">Мапа</p>
       </NavLink>

@@ -5,12 +5,6 @@ import { FaChevronRight } from "react-icons/fa6";
 import ApplePayWidget from "../MockApplePay/MockApplePay";
 import { formatPhone } from "../../utils/formatPhone";
 
-const fuels = [
-  { id: 1, name: "ГАЗ", price: 39.98, color: "#77ADFC" },
-  { id: 2, name: "100", subtitle: "Mustang", price: 78.99, color: "#D38C9C" },
-  { id: 3, name: "95", subtitle: "Mustang", price: 64.98, color: "#D38C9C" },
-  { id: 4, name: "ДП", subtitle: "Diesel", price: 62.5, color: "#D38C9C" },
-];
 function SwiperPetrol({ type = "own" }) {
   const [activeId, setActiveId] = useState();
   const [litres, setLitres] = useState("");
@@ -18,7 +12,16 @@ function SwiperPetrol({ type = "own" }) {
   const [isAgreed, setIsAgreed] = useState(false);
   const [phone, setPhone] = useState("");
 
+  const [fuels, setFuels] = useState([]);
+
   const activeFuel = fuels.find((fuel) => fuel.id === activeId);
+
+  useEffect(() => {
+    const storedFuels = localStorage.getItem("fuels");
+    if (storedFuels) {
+      setFuels(JSON.parse(storedFuels));
+    }
+  }, []);
 
   const calculateTotalPrice = () => {
     if (!activeFuel || !litres || isNaN(parseFloat(litres))) {
