@@ -163,21 +163,18 @@ const FuelManager = () => {
           </button>
         </div>
 
-        {/* Список топлива */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
           {fuels.map((fuel) => (
             <div
               key={fuel.id}
               className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow"
             >
-              {/* Цветная полоса */}
               <div
                 className="h-2 w-full"
                 style={{ backgroundColor: fuel.color }}
               />
 
               <div className="p-5">
-                {/* Название и цена */}
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <h3 className="text-xl font-bold text-gray-800">
@@ -244,11 +241,9 @@ const FuelManager = () => {
         </div>
       </div>
 
-      {/* Диалог добавления/редактирования */}
       {isDialogOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
-            {/* Заголовок */}
             <div className="p-6 border-b border-gray-200">
               <h2 className="text-2xl font-bold text-gray-800">
                 {editingFuel
