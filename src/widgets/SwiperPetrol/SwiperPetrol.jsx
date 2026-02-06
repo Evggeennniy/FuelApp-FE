@@ -74,16 +74,18 @@ function SwiperPetrol({ type = "own" }) {
                 >
                   <p
                     style={{ color: fuel.color }}
-                    className="text-[35px] leading-[35px]"
+                    className="text-[38px] leading-[38px]"
                   >
                     {fuel.name}
                   </p>
 
                   {fuel.subtitle && (
-                    <p className="text-[12px] text-gray-400">{fuel.subtitle}</p>
+                    <p className="text-[13px]  text-[#C5C3C5]">
+                      {fuel.subtitle}
+                    </p>
                   )}
 
-                  <p className="text-[16px] mt-auto text-end  text-gray-500">
+                  <p className="text-[16px] mt-auto text-end font-light  text-[#A09EA1]">
                     {formatPrice(fuel.price)}
                   </p>
                 </button>
@@ -132,7 +134,9 @@ function SwiperPetrol({ type = "own" }) {
           />
         </div>
         <div className="flex justify-between border-b border-[#F7F5F7] px-3  py-4">
-          <div className="text-xs text-[#4D515D]">Спосіб оплати</div>
+          <div className="text-xs text-[#4D515D] flex items-center gap-2">
+            Спосіб оплати <img className="w-9 h-5" src="/logos_apple-pay.png" />
+          </div>
           <div className="text-xs text-[#444852] flex items-center gap-2">
             Apple Pay <FaChevronRight color="#E5E3E5" />
           </div>
@@ -175,7 +179,7 @@ function SwiperPetrol({ type = "own" }) {
           </span>
 
           {/* text */}
-          <span className="ml-3 text-[12px] leading-[16px] text-[#4D515D]">
+          <span className="ml-3 text-[14px] leading-[16px] text-[#4D515D]">
             Я погоджуюсь з{" "}
             <span className="text-[#349B56]">
               правилами купівлі в онлайн-магазині WOG

@@ -4,7 +4,7 @@ import ModalPortal from "../ModalPortal/ModalPortal";
 import { useNavigate } from "react-router-dom";
 
 function ApplePayWidget({ isAgreed, totalPrice }) {
-  const [stage, setStage] = useState("idle"); // idle -> wallet -> processing -> success
+  const [stage, setStage] = useState("idle");
   const [selectedCard, setSelectedCard] = useState(null);
   const navigate = useNavigate();
   const cards = [
@@ -12,22 +12,19 @@ function ApplePayWidget({ isAgreed, totalPrice }) {
       id: 2,
       name: "Visa",
       lastFour: "4242",
-      color: "from-blue-500 to-blue-700",
+      color: "bg-gray-800",
       icon: "VISA",
     },
   ];
 
-  // Начать оплату - открываем кошелек
   const startPayment = () => {
     setStage("wallet");
   };
 
-  // Выбрать карту и начать Face ID
   const selectCard = (card) => {
     setSelectedCard(card);
     setStage("processing");
 
-    // Имитация обработки Face ID
     setTimeout(() => {
       setStage("success");
 
@@ -38,7 +35,6 @@ function ApplePayWidget({ isAgreed, totalPrice }) {
     }, 3000);
   };
 
-  // Сброс виджета
   const resetWidget = () => {
     setStage("idle");
     setSelectedCard(null);
@@ -48,6 +44,7 @@ function ApplePayWidget({ isAgreed, totalPrice }) {
   const closeWallet = () => {
     setStage("idle");
   };
+  // console.log(typeof totalPrice, totalPrice);
 
   return (
     <div className="relative">
@@ -74,12 +71,12 @@ function ApplePayWidget({ isAgreed, totalPrice }) {
         <ModalPortal>
           <>
             <div
-              className="fixed inset-0 bg-black/50 z-[9999]"
+              className="fixed inset-0 pb-4 bg-black/50 z-[9999]"
               onClick={closeWallet}
             />
 
             <div className="fixed bottom-0 left-0 right-0 bg-[#242225] rounded-t-2xl shadow-2xl z-[10000] animate-slideUp">
-              <div className="px-4">
+              <div className="px-4 pb-7">
                 <div className="flex items-center justify-between mb-6">
                   <div>
                     <h3 className="text-xl font-bold text-white">
@@ -111,7 +108,7 @@ function ApplePayWidget({ isAgreed, totalPrice }) {
                           <div
                             className={`w-14 h-10 rounded-lg bg-gradient-to-r ${card.color} flex items-center justify-center text-white font-bold`}
                           >
-                            {card.icon}
+                            {/* {card.icon} */}
                           </div>
 
                           <div>
@@ -147,7 +144,7 @@ function ApplePayWidget({ isAgreed, totalPrice }) {
                         Оплатить компании {"<<"}WOG RETAIL LCC{">>"}
                       </div>
                       <div className="font-medium text-[#FFFFFF] text-lg">
-                        {totalPrice}
+                        {totalPrice.toFixed(2)}
                         <img
                           src="/grivna.svg"
                           alt="Apple Pay"
@@ -162,15 +159,15 @@ function ApplePayWidget({ isAgreed, totalPrice }) {
                   </div>
                 </div>
                 {stage === "processing" && (
-                  <div className="flex flex-col border-t p-2 border-[#595659] items-center justify-center ">
+                  <div className="flex flex-col border-t mt-3 p-2 border-[#595659] items-center justify-center ">
                     {/* Спиннер */}
                     <div className="w-6 h-6 mb-2">
                       <div className="w-full h-full border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
                     </div>
 
                     {/* Текст */}
-                    <div className="text-center">
-                      <div className="text-white font-light text-xs mb-1">
+                    <div className="text-center ">
+                      <div className="text-white font-light text-xs  mb-1">
                         Обработка
                       </div>
                     </div>
