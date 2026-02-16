@@ -144,7 +144,7 @@ function SwiperPetrol({ type = "own" }) {
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 bg-white  p-4">
+      <div className="fixed bottom-0 left-0 right-0 bg-white pb-[20px]  p-4">
         <label className="flex items-center mb-3 cursor-pointer select-none">
           {/* hidden real checkbox */}
           <input
