@@ -57,7 +57,7 @@ function SwiperPetrol({ type = "own" }) {
         <div className="px-3 text-[16px] mb-2 text-[#55545C]">
           Оберіть вид пального
         </div>
-        <Swiper spaceBetween={12} slidesPerView={3.2} className="">
+        <Swiper spaceBetween={12} slidesPerView={3} className="">
           {fuels.map((fuel) => {
             const isActive = fuel.id === activeId;
 
@@ -65,7 +65,7 @@ function SwiperPetrol({ type = "own" }) {
               <SwiperSlide key={fuel.id}>
                 <button
                   onClick={() => setActiveId(fuel.id)}
-                  className={`rounded-lg mt-8 h-auto max-w-[150px] w-full flex flex-col px-5  pt-4 pb-3 mb-2 text-start transition-all
+                  className={`ml-2 rounded-lg mt-8 h-auto w-[130px]  flex flex-col px-5  pt-4 pb-3 mb-2 text-start transition-all
                     ${
                       isActive
                         ? "bg-white shadow-md"
@@ -85,7 +85,9 @@ function SwiperPetrol({ type = "own" }) {
                     </p>
                   )}
 
-                  <p className="text-2xl mt-9 text-end font-light  text-[#A09EA1]">
+                  <p
+                    className={`text-2xl mt-9 text-end font-light ${fuel.subtitle ? "mt-7" : "mt-11"}  text-[#A09EA1]`}
+                  >
                     {formatPrice(fuel.price)}
                   </p>
                 </button>
