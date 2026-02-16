@@ -108,7 +108,7 @@ function SwiperPetrol({ type = "own" }) {
 
               <input
                 type="tel"
-                inputMode="numeric"
+                type="tel"
                 className="w-28 border-b border-[#EAE8EA]
                  text-right text-[#4D515D] text-[16px] outline-none
                  focus:border-[#00A650]
@@ -123,7 +123,7 @@ function SwiperPetrol({ type = "own" }) {
         <div className="flex justify-between px-3  py-4">
           <div className="text-xs text-[#4D515D]">Вкажіть кількість, л</div>
           <input
-            type="number"
+            type="tel"
             className="w-20 border-b border-[#EAE8EA] text-right text-[16px] outline-none
              appearance-none
              [&::-webkit-inner-spin-button]:appearance-none
