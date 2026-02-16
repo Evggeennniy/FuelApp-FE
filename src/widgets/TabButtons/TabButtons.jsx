@@ -11,13 +11,13 @@ const TubButtons = () => {
   };
 
   return (
-    <div className="tub-switcher-container ">
+    <div className="tub-switcher-container  ">
       <div className="bg-[#01A651] pt-4 pb-1">
         <div className="tub-switcher px-4">
           {buttons.map((label, index) => (
             <button
               key={index}
-              className={`tub-button shadow-none! rounded-lg py-3! ${activeButton === index ? "active" : ""}`}
+              className={`tub-button shadow-none! rounded-lg py-[10px]! ${activeButton === index ? "active" : ""}`}
               onClick={() => handleButtonClick(index)}
             >
               <span className="button-content text-sm!">{label}</span>

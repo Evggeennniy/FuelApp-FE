@@ -74,7 +74,7 @@ function SwiperPetrol({ type = "own" }) {
                 >
                   <p
                     style={{ color: fuel.color }}
-                    className={`text-[44px] font-bold leading-[40px] ${fuel.subtitle ? "" : "pt-3"}`}
+                    className={`text-[44px] leading-[40px] ${fuel.subtitle ? "" : "pt-3"}`}
                   >
                     {fuel.name}
                   </p>
@@ -144,7 +144,7 @@ function SwiperPetrol({ type = "own" }) {
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 bg-white  mb-[100px] p-4">
+      <div className="fixed bottom-0 left-0 right-0 bg-white  p-4">
         <label className="flex items-center mb-3 cursor-pointer select-none">
           {/* hidden real checkbox */}
           <input
@@ -156,7 +156,7 @@ function SwiperPetrol({ type = "own" }) {
 
           {/* custom checkbox */}
           <span
-            className={`w-[30px]! h-[30px] mt-[2px] border-2 rounded shrink-0 flex items-center justify-center
+            className={`w-[25px]! h-[25px] mt-[2px] border-2 rounded shrink-0 flex items-center justify-center
         transition-all
         ${
           isAgreed
@@ -180,10 +180,10 @@ function SwiperPetrol({ type = "own" }) {
           </span>
 
           {/* text */}
-          <span className="ml-3 text-xl leading-[26px] text-[#4D515D]">
+          <span className="ml-3 text-md leading-[26px] text-[#4D515D]">
             Я погоджуюсь з{" "}
             <span className="text-[#349B56]">
-              правилами купівлі в онлайн-магазині WOG
+              правилами купівлі в онлайн -магазині WOG
             </span>
           </span>
         </label>
@@ -196,7 +196,7 @@ function SwiperPetrol({ type = "own" }) {
         </div>
       </div>
 
-      <div className="h-28"></div>
+      {/* <div className="h-28"></div> */}
     </>
   );
 }
