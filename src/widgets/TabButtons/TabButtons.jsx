@@ -17,10 +17,10 @@ const TubButtons = () => {
           {buttons.map((label, index) => (
             <button
               key={index}
-              className={`tub-button rounded-lg ${activeButton === index ? "active" : ""}`}
+              className={`tub-button shadow-none! rounded-lg py-3! ${activeButton === index ? "active" : ""}`}
               onClick={() => handleButtonClick(index)}
             >
-              <span className="button-content">{label}</span>
+              <span className="button-content text-sm!">{label}</span>
             </button>
           ))}
         </div>

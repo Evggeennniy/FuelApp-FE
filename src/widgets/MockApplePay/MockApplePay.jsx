@@ -54,7 +54,7 @@ function ApplePayWidget({ isAgreed, totalPrice }) {
         onClick={startPayment}
         className={`px-6 py-3 rounded-lg ${
           !isAgreed || totalPrice === 0
-            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+            ? "bg-[#ACAAAC] text-white cursor-not-allowed"
             : "bg-[#01A651] text-white"
         }`}
         disabled={!isAgreed || totalPrice === 0}

@@ -54,7 +54,7 @@ function SwiperPetrol({ type = "own" }) {
   return (
     <>
       <div className="bg-[#F6F4F7] py-3">
-        <div className="px-3 text-[13px] mb-2 text-[#55545C]">
+        <div className="px-3 text-[16px] mb-2 text-[#55545C]">
           Оберіть вид пального
         </div>
         <Swiper spaceBetween={12} slidesPerView={3.2} className="">
@@ -65,7 +65,7 @@ function SwiperPetrol({ type = "own" }) {
               <SwiperSlide key={fuel.id}>
                 <button
                   onClick={() => setActiveId(fuel.id)}
-                  className={`rounded-lg h-[125px] max-w-[110px] w-full flex flex-col px-5 pt-3 pb-1 mb-2 text-start transition-all
+                  className={`rounded-lg mt-8 h-auto max-w-[150px] w-full flex flex-col px-5  pt-4 pb-3 mb-2 text-start transition-all
                     ${
                       isActive
                         ? "bg-white shadow-md"
@@ -74,18 +74,18 @@ function SwiperPetrol({ type = "own" }) {
                 >
                   <p
                     style={{ color: fuel.color }}
-                    className="text-[38px] leading-[38px]"
+                    className={`text-[44px] font-bold leading-[40px] ${fuel.subtitle ? "" : "pt-3"}`}
                   >
                     {fuel.name}
                   </p>
 
                   {fuel.subtitle && (
-                    <p className="text-[13px]  text-[#C5C3C5]">
+                    <p className="text-[18px]  text-[#C5C3C5]">
                       {fuel.subtitle}
                     </p>
                   )}
 
-                  <p className="text-[16px] mt-auto text-end font-light  text-[#A09EA1]">
+                  <p className="text-2xl mt-9 text-end font-light  text-[#A09EA1]">
                     {formatPrice(fuel.price)}
                   </p>
                 </button>
@@ -98,10 +98,10 @@ function SwiperPetrol({ type = "own" }) {
       <div className="bg-[#FFFFfF]">
         {type !== "own" && (
           <div
-            className="flex justify-between px-3  py-4
+            className="flex justify-between px-3 border-b border-[#F7F5F7]   py-5
              animate-fadeSlideUp"
           >
-            <div className="text-xs text-[#4D515D]">Номер одержувача</div>
+            <div className="text-sm text-[#4D515D]">Номер одержувача</div>
 
             <div className="flex items-center gap-1">
               <div className="text-[10px] text-[#A09EA1]">+380</div>
@@ -120,8 +120,8 @@ function SwiperPetrol({ type = "own" }) {
             </div>
           </div>
         )}
-        <div className="flex justify-between px-3  py-4">
-          <div className="text-xs text-[#4D515D]">Вкажіть кількість, л</div>
+        <div className="flex justify-between px-3 border-b border-[#F7F5F7]  py-5">
+          <div className="text-sm text-[#4D515D]">Вкажіть кількість, л</div>
           <input
             type="tel"
             className="w-20 border-b border-[#EAE8EA] text-right text-[16px] outline-none
@@ -133,9 +133,10 @@ function SwiperPetrol({ type = "own" }) {
             onChange={(e) => setLitres(e.target.value)}
           />
         </div>
-        <div className="flex justify-between border-b border-[#F7F5F7] px-3  py-4">
-          <div className="text-xs text-[#4D515D] flex items-center gap-2">
-            Спосіб оплати <img className="w-9 h-5" src="/logos_apple-pay.png" />
+        <div className="flex justify-between border-b border-[#F7F5F7] px-3 py-5">
+          <div className="text-sm text-[#4D515D] flex items-center gap-2">
+            Спосіб оплати{" "}
+            <img className="w-13 h-5" src="/logos_apple-pay.png" />
           </div>
           <div className="text-xs text-[#444852] flex items-center gap-2">
             Apple Pay <FaChevronRight color="#E5E3E5" />
@@ -143,7 +144,7 @@ function SwiperPetrol({ type = "own" }) {
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4">
+      <div className="fixed bottom-0 left-0 right-0 bg-white  mb-[100px] p-4">
         <label className="flex items-center mb-3 cursor-pointer select-none">
           {/* hidden real checkbox */}
           <input
@@ -155,7 +156,7 @@ function SwiperPetrol({ type = "own" }) {
 
           {/* custom checkbox */}
           <span
-            className={`w-[25px]! h-[23px] mt-[2px] border-2 rounded flex items-center justify-center
+            className={`w-[30px]! h-[30px] mt-[2px] border-2 rounded shrink-0 flex items-center justify-center
         transition-all
         ${
           isAgreed
@@ -179,7 +180,7 @@ function SwiperPetrol({ type = "own" }) {
           </span>
 
           {/* text */}
-          <span className="ml-3 text-[14px] leading-[16px] text-[#4D515D]">
+          <span className="ml-3 text-xl leading-[26px] text-[#4D515D]">
             Я погоджуюсь з{" "}
             <span className="text-[#349B56]">
               правилами купівлі в онлайн-магазині WOG
@@ -188,7 +189,7 @@ function SwiperPetrol({ type = "own" }) {
         </label>
 
         <div className="flex items-center justify-end gap-2">
-          <div className="text-[14px] text-[#0F8F56]">
+          <div className="text-[16px] text-[#0F8F56]">
             {formatPrice(totalPrice)}
           </div>
           <ApplePayWidget isAgreed={isAgreed} totalPrice={totalPrice} />
