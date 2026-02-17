@@ -106,7 +106,7 @@ function SwiperPetrol({ type = "own" }) {
             <div className="text-sm text-[#4D515D]">Номер одержувача</div>
 
             <div className="flex items-center gap-1">
-              <div className="text-[10px] text-[#A09EA1]">+380</div>
+              <div className="text-[14px] text-[#A09EA1]">+380</div>
 
               <input
                 type="tel"
